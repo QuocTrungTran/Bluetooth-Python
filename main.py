@@ -46,18 +46,18 @@ def server():
 
     # bind to a tuple (address, port number) NOTICE: the port number must be even and between 1 to 30.
     # https://stackoverflow.com/questions/53685194/oserror-the-requested-address-is-not-valid-in-its-context
-    server_socket.bind(("", 18))
+    port = 28
+    server_socket.bind(("", port))
     server_socket.listen(1)
 
     # port = server_socket.getsockname()[1]
     #
-    # uuid = "94f39d29-7d6d-437d-973b-fba39e49d4ee"
+    uuid = "74fbcbeb-acd7-4c2d-bd7f-2a223923a8dc"
 
-    # bluetooth.advertise_service(server_socket, "Sample server", service_id=uuid,
-    #                             service_classes=[uuid, SERIAL_PORT_CLASS],
-    #                             profiles=[SERIAL_PORT_CLASS])
-    #
-    # print("Waiting for connection on RFCOMM channel", port)
+    bluetooth.advertise_service(server_socket, "Sample server", service_id=uuid,
+                                service_classes=[uuid, bluetooth.SERIAL_PORT_CLASS],
+                                profiles=[bluetooth.SERIAL_PORT_PROFILE])
+    print("Waiting for connection on RFCOMM channel", port)
 
     print("Waiting for connection......")
     client_socket, client_info = server_socket.accept()
